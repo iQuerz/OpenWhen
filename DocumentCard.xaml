@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Open_When.DocumentCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Open_When"
+             mc:Ignorable="d" Cursor="Hand"
+             d:DesignHeight="200" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border x:Name="BtnBorder" Height="200" Width="300"
+                    Background="#B388EB" CornerRadius="10"
+                    BorderBrush="#231942" BorderThickness="8">
+                <TextBlock Text="{Binding Content, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                           Margin="10"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Foreground="#231942" TextAlignment="Center"
+                           TextWrapping="Wrap" FontSize="30" x:Name="BtnText"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="BtnBorder" Property="Background" Value="#C89CFF"/>
+                    <Setter TargetName="BtnText" Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter TargetName="BtnText" Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <Button Template="{StaticResource ButtonTemplate}" x:Name="MainButton"
+            Click="MainButton_Click">
+        Open When You're Feeling Down
+    </Button>
+</UserControl>
